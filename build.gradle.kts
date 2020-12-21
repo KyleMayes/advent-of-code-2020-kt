@@ -18,6 +18,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.apache.commons:commons-lang3:3.11")
     implementation("org.apache.commons:commons-math3:3.6.1")
+    implementation("com.google.guava:guava:30.1-jre")
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
