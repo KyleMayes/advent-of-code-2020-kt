@@ -16,6 +16,8 @@ version = "1.0.0"
 dependencies {
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib"))
+    implementation("org.apache.commons:commons-lang3:3.11")
+    implementation("org.apache.commons:commons-math3:3.6.1")
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
