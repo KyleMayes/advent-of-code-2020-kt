@@ -11,6 +11,18 @@ import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+/** A 2D direction. */
+enum class Direction(val delta: Point, val diagonal: Boolean = false) {
+    N(Point(0, 1)),
+    E(Point(1, 0)),
+    S(Point(0, -1)),
+    W(Point(-1, 0)),
+    NE(Point(1, 1), true),
+    SE(Point(1, -1), true),
+    SW(Point(-1, -1), true),
+    NW(Point(-1, 1), true),
+}
+
 /** A 2D point. */
 data class Point(val x: Int, val y: Int) : Comparable<Point> {
     /** Returns the Euclidean distance between this point and the supplied point. */
@@ -61,19 +73,9 @@ data class Point(val x: Int, val y: Int) : Comparable<Point> {
     }
 
     /** Returns the points neighboring this point. */
-    fun neighbors(diagonal: Boolean = true): List<Point> {
-        val neighbors = mutableListOf<Point>()
-
-        for (dy in -1..1) {
-            for (dx in -1..1) {
-                if ((dx != 0 || dy != 0) && (diagonal || ((dx != 0) xor (dy != 0)))) {
-                    neighbors.add(Point(x + dx, y + dy))
-                }
-            }
-        }
-
-        return neighbors
-    }
+    fun neighbors(diagonal: Boolean = true) = Direction.values()
+        .filter { diagonal || !it.diagonal }
+        .map { this + it.delta }
 
     operator fun plus(other: Point): Point = Point(x + other.x, y + other.y)
     operator fun minus(other: Point): Point = Point(x - other.x, y - other.y)
